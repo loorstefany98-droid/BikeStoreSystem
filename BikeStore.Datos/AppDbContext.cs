@@ -10,7 +10,7 @@ namespace BikeStore.Datos
         }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Bicicleta> Bicicletas { get; set; }
+        public DbSet<BikeStore.Datos.Models.Bicicleta> Bicicletas { get; set; }
         public DbSet<Venta> Ventas { get; set; }
         public DbSet<DetalleVenta> DetallesVenta { get; set; }
 
@@ -18,7 +18,7 @@ namespace BikeStore.Datos
         {
             base.OnModelCreating(modelBuilder);
             
-            // Mapeo manual para asegurar nombres de tabla exactos si es necesario, 
+            // mapeo manual para asegurar nombres de tabla exactos si es necesario, 
             // aunque ya lo pusimos con DataAnnotations [Table(...)]
         }
     }
