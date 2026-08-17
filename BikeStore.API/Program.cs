@@ -3,7 +3,6 @@ using BikeStore.Datos;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// agregar servicios al contenedor
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
