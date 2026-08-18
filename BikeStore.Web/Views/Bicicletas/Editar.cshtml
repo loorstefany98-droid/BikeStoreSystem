@@ -1,0 +1,52 @@
+﻿@model BikeStore.Web.Models.Bicicleta
+
+@{
+    ViewData["Title"] = "Editar Bicicleta";
+}
+
+<h2>Editar Bicicleta</h2>
+
+<form asp-action="Editar" method="post">
+    <input type="hidden" asp-for="IdBicicleta" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Marca" class="control-label"></label>
+        <input asp-for="Marca" class="form-control" />
+        <span asp-validation-for="Marca" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Modelo" class="control-label"></label>
+        <input asp-for="Modelo" class="form-control" />
+        <span asp-validation-for="Modelo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Precio" class="control-label"></label>
+        <input asp-for="Precio" class="form-control" />
+        <span asp-validation-for="Precio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Stock" class="control-label"></label>
+        <input asp-for="Stock" class="form-control" />
+        <span asp-validation-for="Stock" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="IdCategoria" class="control-label">Categoría</label>
+        <select asp-for="IdCategoria" class="form-control" asp-items="ViewBag.ListaCategorias">
+            <option value="">-- Seleccione una categoría --</option>
+        </select>
+        <span asp-validation-for="IdCategoria" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Estado" class="control-label"></label>
+        <input asp-for="Estado" class="form-control" />
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

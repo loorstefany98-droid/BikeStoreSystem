@@ -20,14 +20,18 @@
     <a asp-action="Crear" class="btn btn-primary">+ Nueva bicicleta</a>
 </div>
 
+<!-- Formulario de Búsqueda Mejorado con Select -->
 <form method="get" asp-action="Index" class="bg-white shadow-sm rounded p-3 mb-4 d-flex gap-2 align-items-end">
     <div class="flex-grow-1">
         <label class="form-label mb-1">Buscar por marca</label>
         <input type="text" name="marca" value="@marcaFiltro" class="form-control" placeholder="Ej: Trek, Giant..." />
     </div>
     <div class="flex-grow-1">
-        <label class="form-label mb-1">ID de categoría</label>
-        <input type="text" name="categoria" value="@categoriaFiltro" class="form-control" placeholder="Ej: 1" />
+        <label class="form-label mb-1">Categoría</label>
+        <!-- Cambiamos el input de texto por un select que usa el ViewBag.ListaCategorias -->
+        <select name="categoria" class="form-control" asp-items="ViewBag.ListaCategorias">
+            <option value="">-- Todas las categorías --</option>
+        </select>
     </div>
     <button type="submit" class="btn btn-primary">Buscar</button>
     <a asp-action="Index" class="btn btn-outline-secondary">Limpiar</a>
