@@ -1,9 +1,11 @@
-﻿@model List<BikeStore.Web.Models.Bicicleta>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model List<BikeStore.Web.Models.Bicicleta>
 
 @{
     ViewData["Title"] = "Bicicletas";
     var marcaFiltro = ViewBag.MarcaFiltro as string;
     var categoriaFiltro = ViewBag.CategoriaFiltro as string;
+    var listaCategorias = ViewBag.ListaCategorias as SelectList;
 }
 
 <style>
@@ -48,6 +50,7 @@ else
             <tr>
                 <th>Marca</th>
                 <th>Modelo</th>
+                <th>Categoría</th>
                 <th class="text-end">Precio</th>
                 <th class="text-center">Stock</th>
                 <th class="text-center">Estado</th>
@@ -65,9 +68,14 @@ else
                     _ => "bg-secondary"
                 };
 
+                var nombreCategoria = listaCategorias?
+                    .FirstOrDefault(c => c.Value == bici.IdCategoria.ToString())?.Text
+                    ?? bici.IdCategoria.ToString();
+
                 <tr>
                     <td>@bici.Marca</td>
                     <td>@bici.Modelo</td>
+                    <td>@nombreCategoria</td>
                     <td class="text-end">$@bici.Precio.ToString("N2")</td>
                     <td class="text-center">@bici.Stock</td>
                     <td class="text-center">

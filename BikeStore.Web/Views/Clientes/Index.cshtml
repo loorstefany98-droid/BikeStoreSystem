@@ -50,6 +50,7 @@ else
                     <td>@cliente.Telefono</td>
                     <td>@cliente.Correo</td>
                     <td class="text-center">
+                        <a asp-action="Editar" asp-route-id="@cliente.IdCliente" class="btn btn-sm btn-outline-secondary">Editar</a>
                         <form asp-action="Eliminar" asp-route-id="@cliente.IdCliente" method="post" style="display:inline;"
                               onsubmit="return confirm('¿Eliminar a @cliente.Nombres @cliente.Apellidos?');">
                             <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>

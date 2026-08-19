@@ -29,12 +29,13 @@
 else
 {
     <table class="table table-hover align-middle bg-white shadow-sm rounded overflow-hidden mb-0">
-        <thead style="background-color: #993c1d;">
+        <thead style="background-color: #854f0b;">
             <tr style="color: white;">
                 <th>N° Venta</th>
                 <th>Fecha</th>
                 <th>Cliente</th>
                 <th class="text-end">Total</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -45,6 +46,9 @@ else
                     <td>@venta.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
                     <td>@(venta.Cliente != null ? $"{venta.Cliente.Nombres} {venta.Cliente.Apellidos}" : "Cliente #" + venta.IdCliente)</td>
                     <td class="text-end">$@venta.Total.ToString("N2")</td>
+                    <td class="text-center">
+                        <a asp-action="Detalles" asp-route-id="@venta.IdVenta" class="btn btn-sm" style="background-color:#d85a30; color:white;">Ver detalles</a>
+                    </td>
                 </tr>
             }
         </tbody>

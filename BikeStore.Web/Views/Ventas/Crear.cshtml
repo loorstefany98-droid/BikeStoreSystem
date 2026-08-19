@@ -48,6 +48,24 @@
 
         <button type="button" class="btn btn-outline-secondary btn-sm mb-3" onclick="agregarFila()">+ Agregar bicicleta</button>
 
+        <div class="card mb-3" style="max-width: 350px; margin-left: auto; border-color:#d85a30;">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-1">
+                    <span>Subtotal:</span>
+                    <span id="txtSubtotal">$0.00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <span>IVA (15%):</span>
+                    <span id="txtIva">$0.00</span>
+                </div>
+                <hr class="my-2" />
+                <div class="d-flex justify-content-between fw-bold" style="color:#d85a30;">
+                    <span>Total:</span>
+                    <span id="txtTotal">$0.00</span>
+                </div>
+            </div>
+        </div>
+
         <div class="d-flex gap-2">
             <button type="submit" class="btn" style="background-color:#d85a30; color:white;">Registrar venta</button>
             <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
@@ -73,16 +91,34 @@
                 <td>
                     <select name="Detalles[${idx}].IdBicicleta" class="form-select" onchange="actualizarPrecio(this)" required>${opciones}</select>
                 </td>
-                <td><input type="number" name="Detalles[${idx}].Cantidad" class="form-control" min="1" value="1" required /></td>
+                <td><input type="number" name="Detalles[${idx}].Cantidad" class="form-control cantidad-input" min="1" value="1" oninput="calcularTotales()" required /></td>
                 <td><input type="number" name="Detalles[${idx}].Precio" class="form-control precio-input" step="0.01" readonly /></td>
-                <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove()">Quitar</button></td>
+                <td><button type="button" class="btn btn-sm btn-outline-danger" onclick="this.closest('tr').remove(); calcularTotales();">Quitar</button></td>
             `;
         tbody.appendChild(fila);
+        calcularTotales();
     }
 
     function actualizarPrecio(select) {
         const precio = select.options[select.selectedIndex].dataset.precio || 0;
         select.closest("tr").querySelector(".precio-input").value = precio;
+        calcularTotales();
+    }
+
+    function calcularTotales() {
+        let subtotal = 0;
+        document.querySelectorAll("#tablaDetalle tbody tr").forEach(fila => {
+            const cantidad = parseFloat(fila.querySelector(".cantidad-input")?.value) || 0;
+            const precio = parseFloat(fila.querySelector(".precio-input")?.value) || 0;
+            subtotal += cantidad * precio;
+        });
+
+        const iva = subtotal * 0.15;
+        const total = subtotal + iva;
+
+        document.getElementById("txtSubtotal").textContent = "$" + subtotal.toFixed(2);
+        document.getElementById("txtIva").textContent = "$" + iva.toFixed(2);
+        document.getElementById("txtTotal").textContent = "$" + total.toFixed(2);
     }
 
     agregarFila();
