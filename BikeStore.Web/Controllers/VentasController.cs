@@ -27,6 +27,16 @@ namespace BikeStore.Web.Controllers
             return View(ventas);
         }
 
+        // GET: /Ventas/Detalles/5 -> muestra el detalle de una venta
+        public async Task<IActionResult> Detalles(int id)
+        {
+            var venta = await _ventaService.ObtenerPorIdAsync(id);
+            if (venta == null)
+                return NotFound();
+
+            return View(venta);
+        }
+
         // GET: /Ventas/Crear -> muestra el formulario de facturación
         public async Task<IActionResult> Crear()
         {

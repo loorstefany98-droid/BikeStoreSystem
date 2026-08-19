@@ -25,6 +25,12 @@ namespace BikeStore.Web.Services
             return JsonSerializer.Deserialize<List<Venta>>(json, _jsonOptions) ?? new List<Venta>();
         }
 
+        public async Task<Venta?> ObtenerPorIdAsync(int id)
+        {
+            var todas = await ObtenerTodasAsync();
+            return todas.FirstOrDefault(v => v.IdVenta == id);
+        }
+
         public async Task<(bool Exito, string? Error, JsonElement? Resultado)> RegistrarAsync(RegistrarVentaRequest venta)
         {
             var content = new StringContent(

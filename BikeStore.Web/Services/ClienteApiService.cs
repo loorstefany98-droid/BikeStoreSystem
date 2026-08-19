@@ -46,6 +46,19 @@ namespace BikeStore.Web.Services
             return (false, error);
         }
 
+        public async Task<(bool Exito, string? Error)> ActualizarAsync(int id, Cliente cliente)
+        {
+            var content = new StringContent(
+                JsonSerializer.Serialize(cliente), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PutAsync($"api/clientes/{id}", content);
+
+            if (response.IsSuccessStatusCode)
+                return (true, null);
+
+            var error = await response.Content.ReadAsStringAsync();
+            return (false, error);
+        }
+
         public async Task<bool> EliminarAsync(int id)
         {
             var response = await _httpClient.DeleteAsync($"api/clientes/{id}");
