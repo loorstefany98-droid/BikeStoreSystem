@@ -1,0 +1,34 @@
+﻿@model BikeStore.Web.Models.Categoria
+
+@{
+    ViewData["Title"] = "Nueva categoría";
+}
+
+<style>
+    body {
+        background-color: #f3eefa;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="bg-white shadow-sm rounded p-4">
+            <h1 class="mb-4" style="color: #6b3fa0;">Registrar categoría</h1>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <form asp-action="Crear" method="post">
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label">Nombre</label>
+                    <input asp-for="Nombre" class="form-control" required />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn" style="background-color: #8a5cc9; color: white;">Guardar categoría</button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
