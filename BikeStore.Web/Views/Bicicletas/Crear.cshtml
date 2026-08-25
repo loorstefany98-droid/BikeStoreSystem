@@ -27,7 +27,7 @@
 
     <div class="form-group mb-3">
         <label asp-for="Stock" class="control-label"></label>
-        <input asp-for="Stock" class="form-control" />
+        <input asp-for="Stock" class="form-control" id="stockInput" oninput="updateEstado()" />
         <span asp-validation-for="Stock" class="text-danger"></span>
     </div>
 
@@ -41,10 +41,26 @@
 
     <div class="form-group mb-3">
         <label asp-for="Estado" class="control-label"></label>
-        <input asp-for="Estado" class="form-control" />
+        <input asp-for="Estado" class="form-control" id="estadoInput" readonly />
         <span asp-validation-for="Estado" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Crear</button>
     <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
 </form>
+
+<script>
+    function updateEstado() {
+        var stock = parseInt(document.getElementById('stockInput').value) || 0;
+        var estadoInput = document.getElementById('estadoInput');
+        if (stock === 0) {
+            estadoInput.value = 'Agotado';
+        } else if (stock >= 1 && stock <= 15) {
+            estadoInput.value = 'Stock bajo';
+        } else {
+            estadoInput.value = 'Disponible';
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", updateEstado);
+</script>
