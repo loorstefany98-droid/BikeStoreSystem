@@ -19,6 +19,8 @@
 
             <form asp-action="Editar" method="post">
                 <input type="hidden" asp-for="IdCategoria" />
+                <input type="hidden" asp-for="Descripcion" />
+                <input type="hidden" asp-for="Activo" />
 
                 <div class="mb-3">
                     <label asp-for="Nombre" class="form-label">Nombre</label>

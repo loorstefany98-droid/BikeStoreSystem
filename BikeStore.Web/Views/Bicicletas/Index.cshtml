@@ -60,10 +60,14 @@ else
         <tbody>
             @foreach (var bici in Model)
             {
-                string badgeClass = bici.Estado switch
+                string estadoReal = "Disponible";
+                if (bici.Stock == 0) estadoReal = "Agotado";
+                else if (bici.Stock >= 1 && bici.Stock <= 15) estadoReal = "Stock bajo";
+
+                string badgeClass = estadoReal switch
                 {
                     "Disponible" => "bg-success",
-                    "Stock Bajo" => "bg-warning text-dark",
+                    "Stock bajo" => "bg-warning text-dark",
                     "Agotado" => "bg-danger",
                     _ => "bg-secondary"
                 };
@@ -79,7 +83,7 @@ else
                     <td class="text-end">$@bici.Precio.ToString("N2")</td>
                     <td class="text-center">@bici.Stock</td>
                     <td class="text-center">
-                        <span class="badge @badgeClass">@bici.Estado</span>
+                        <span class="badge @badgeClass">@estadoReal</span>
                     </td>
                     <td class="text-center">
                         <a asp-action="Editar" asp-route-id="@bici.IdBicicleta" class="btn btn-sm btn-outline-secondary">Editar</a>

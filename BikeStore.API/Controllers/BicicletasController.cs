@@ -90,6 +90,13 @@ namespace BikeStore.API.Controllers
         {
             try
             {
+                if (bicicleta.Stock == 0)
+                    bicicleta.Estado = "Agotado";
+                else if (bicicleta.Stock >= 1 && bicicleta.Stock <= 15)
+                    bicicleta.Estado = "Stock bajo";
+                else
+                    bicicleta.Estado = "Disponible";
+
                 var db = new BicicletaRepository(_cadenaConexion);
                 bool respuesta = db.Registrar(bicicleta);
 
@@ -120,6 +127,13 @@ namespace BikeStore.API.Controllers
             try
             {
                 bicicleta.IdBicicleta = id;
+
+                if (bicicleta.Stock == 0)
+                    bicicleta.Estado = "Agotado";
+                else if (bicicleta.Stock >= 1 && bicicleta.Stock <= 15)
+                    bicicleta.Estado = "Stock bajo";
+                else
+                    bicicleta.Estado = "Disponible";
 
                 var db = new BicicletaRepository(_cadenaConexion);
                 bool respuesta = db.Actualizar(bicicleta);
